@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Demo</title>
+</head>
+<body>
+    <div id = 'mvvm'>
+        <input type='text' v-model="str" style="margin-bottom: 10px">
+        <input type='text' v-model="home.str">
+        <p>{{printString}}</p>
+        <button v-on:click="changeText">click me</button>
+    </div>
+    <script src="./js/compile.js"></script>
+    <script src="./js/mvvm.js"></script>
+    <script src="./js/observer.js"></script>
+    <script src="./js/watcher.js"></script>
+    <script>
+        var vm = new MVVM ({
+            el: '#mvvm',
+            data: {
+                str: 'hello',
+                home: {
+                    str: 'word'
+                },
+                flag: true
+            },
+            computed: {
+                printString: function () {
+                    return this.str + ' ' + this.home.str + '!';
+                }
+            },
+            methods: {
+                changeText: function (e) {
+                    this.home.str = this.flag ? "china" : "world";
+                    this.flag = !this.flag;
+                }
+            }
+        });
+        vm.$watch('home.str',function () {
+
+        });
+    </script>
+</body>
+</html>
