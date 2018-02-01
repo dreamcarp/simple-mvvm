@@ -1,12 +1,12 @@
 project的设计过程：<br/>
 1.理清Vue双向数据绑定的原理，核心是数据劫持方法。它通过Object.defineProperty()来劫持data中各个属性的getter／setter，当数据发生变化时发
-布消息给订阅者，触发相应的监听事件。<br/><br/>
+布消息给订阅者，触发相应的监听事件。<br/>
 
 2.将MVVM框架拆分为四个模块：observer、compile、watcher、mvvm。<br/>
 （1）observer：数据监听器，对所有属性进行监听。如果数据发生变化，通过notify方法通知订阅者。<br/>
 （2）compile：指令解析器，将模版中的指令解析成数据。此次设计的指令有v-on/v-model指令，v-on绑定事件，v-model绑定属性。<br/>
 （3）watcher:是observer、compile之间的桥梁。通过update方法触发compile中绑定的回调，更新数据。<br/>
-（4）mvvm：数据绑定的入口，初始化时执行observer方法及事例化compile对象。<br/><br/>
+（4）mvvm：数据绑定的入口，初始化时执行observer方法及事例化compile对象。<br/>
 
 3.index.html中使用上述设计的mvvm框架，进行简单的测试。<br/><br/><br/>
 
